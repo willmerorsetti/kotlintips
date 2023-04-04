@@ -7,10 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,17 +16,22 @@ import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.willmer.gamermvvmapp.ui.theme.GammerMVVMAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            GammerMVVMAppTheme {
+            GammerMVVMAppTheme (darkTheme = true) {
                 // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
                     //Greeting("Android")
                     BodyContent()
                 }
@@ -48,7 +50,9 @@ fun BodyContent() {
         ,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(painter = painterResource(id = R.drawable.control ) ,
+        Image(
+            modifier =Modifier.height(130.dp),
+            painter = painterResource(id = R.drawable.control ) ,
             contentDescription ="Control Xbox360"
         )
         Text(text = "Firebase MVVM")
@@ -75,6 +79,26 @@ fun BodyContent() {
                 Text(text = "Contraseña")
             }
         )
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 30.dp, vertical = 15.dp),
+            onClick = {  }) {
+            Text(text = "INICIAR SESION")
+        }
+        Row() {
+            Text(
+                text = "Notienes cuenta",
+                fontSize = 14.sp,
+                color=Color.Gray
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                text = "REGISTRATE AQUI!",
+                fontSize = 14.sp,
+                color=Color.Red, fontWeight = FontWeight.Bold
+            )
+        }
     }
 }
 
@@ -90,8 +114,14 @@ fun Greeting(name: String) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
-    GammerMVVMAppTheme {
-        //Greeting("World")
-        BodyContent()
+    GammerMVVMAppTheme (darkTheme = true) {
+        // A surface container using the 'background' color from the theme
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colors.background
+        ) {
+            //Greeting("Android")
+            BodyContent()
+        }
     }
 }
